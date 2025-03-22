@@ -17,11 +17,17 @@ import java.util.List;
 public class SauceDemo {
     WebDriver driver;
 
-    // 🔒 Use static so all threads share the same ExtentReports instance
+    // Use static so all threads share the same ExtentReports instance
     private static ExtentReports extent = ExtentManager.getInstance();
 
-    // 🧵 Thread-safe test instance
+    // Thread-safe test instance
     private static ThreadLocal<ExtentTest> extentTest = new ThreadLocal<>();
+
+    @BeforeSuite
+    public void setupReport() {
+        System.out.println("Initializing Extent Report...");
+        extent = ExtentManager.getInstance();
+    }
 
     @Parameters("browser")
     @BeforeMethod

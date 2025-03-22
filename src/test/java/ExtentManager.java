@@ -7,11 +7,12 @@ public class ExtentManager {
     private static ExtentReports extent;
 
     public static ExtentReports getInstance() {
+        System.out.println(" ExtentManager.getInstance() called");
         if (extent == null) {
             String reportDir = System.getProperty("user.dir") + File.separator + "test-output";
             String reportPath = reportDir + File.separator + "ExtentReport.html";
 
-            System.out.println("✅ Extent report path: " + reportPath);
+            System.out.println("Extent report path: " + reportPath);
 
             File dir = new File(reportDir);
             if (!dir.exists()) {
@@ -31,7 +32,7 @@ public class ExtentManager {
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                 if (extent != null) {
                     extent.flush();
-                    System.out.println("✅ Extent report flushed via shutdown hook");
+                    System.out.println("Extent report flushed via shutdown hook");
                 }
             }));
         }
