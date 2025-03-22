@@ -8,20 +8,21 @@ public class ExtentManager {
 
     public static ExtentReports getInstance() {
         if (extent == null) {
-            String reportDir = "test-output";
-            File dir = new File(reportDir);
-            if (!dir.exists()) {
-                dir.mkdirs(); // ✅ create test-output if missing
+            // Ensure Jenkins-compatible folder path
+            String reportPath = System.getProperty("user.dir") + "/test-output/ExtentReport.html";
+            File reportDir = new File(System.getProperty("user.dir") + "/test-output");
+            if (!reportDir.exists()) {
+                reportDir.mkdirs(); // ✅ Create it if missing
             }
 
-            ExtentSparkReporter htmlReporter = new ExtentSparkReporter(reportDir + "/ExtentReport.html");
-            htmlReporter.config().setReportName("Sauce Demo Test Report");
-            htmlReporter.config().setDocumentTitle("Automation Report");
+            ExtentSparkReporter spark = new ExtentSparkReporter(reportPath);
+            spark.config().setDocumentTitle("Automation Report");
+            spark.config().setReportName("SauceDemo Selenium Report");
 
             extent = new ExtentReports();
-            extent.attachReporter(htmlReporter);
-            extent.setSystemInfo("Tester", "Sravya");
-            extent.setSystemInfo("Environment", "Jenkins Grid");
+            extent.attachReporter(spark);
+            extent.setSystemInfo("Environment", "Jenkins");
+            extent.setSystemInfo("Executed By", "Sravya");
         }
         return extent;
     }
