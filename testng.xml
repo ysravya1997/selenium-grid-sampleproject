@@ -3,12 +3,6 @@
 
 <suite name="SauceDemoSuite" parallel="tests" thread-count="2">
 
-    <listeners>
-<!--        <listener class-name="org.testng.reporters.EmailableReporter"/>-->
-        <listener class-name="org.testng.reporters.XMLReporter"/>
-        <listener class-name="org.testng.reporters.SuiteHTMLReporter"/>
-    </listeners>
-
     <test name="ChromeTest">
         <parameter name="browser" value="chrome"/>
         <classes>
