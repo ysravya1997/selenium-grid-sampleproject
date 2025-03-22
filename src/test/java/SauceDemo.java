@@ -1,7 +1,6 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.*;
@@ -10,10 +9,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
+
 public class SauceDemo
 {
     WebDriver driver;
-
 
     @Parameters("browser")
     @BeforeMethod
@@ -54,8 +53,7 @@ public class SauceDemo
 
 
     @AfterMethod
-    public void tearDown() throws InterruptedException {
-        Thread.sleep(10000);
+    public void tearDown() {
         if(driver!=null) {
             driver.quit();
         }
